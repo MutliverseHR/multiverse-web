@@ -226,3 +226,110 @@ class ChessOverlay {
 
   reposition() { this._position(); }
 }
+
+/* ─────────────────────────────────────────────────────────────────
+   shatterCard — explodes a fork card into triangular shards
+   Uses anime.js for animation.
+
+   el       — the .fork-card DOM element
+   color    — the card's accent color (--fork-border value)
+   onDone   — called after animation completes
+   ───────────────────────────────────────────────────────────────── */
+function shatterCard(el, color, onDone) {
+  const rect = el.getBoundingClientRect();
+
+  // Full-viewport SVG to hold the shards
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:visible';
+  document.body.appendChild(svg);
+
+  // Generate shard triangles that tile the card
+  const shards = _triangulate(rect, 50);
+
+  shards.forEach(s => {
+    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    poly.setAttribute('points', s.pts);
+    poly.setAttribute('fill',   color);
+    poly.setAttribute('stroke', color);
+    poly.setAttribute('stroke-width', '0.5');
+    poly.setAttribute('opacity', '0.9');
+    svg.appendChild(poly);
+
+    // Each shard flies away from the card's centre
+    const cx   = rect.left + rect.width  / 2;
+    const cy   = rect.top  + rect.height / 2;
+    const dx   = (s.cx - cx) * (1.4 + Math.random());
+    const dy   = (s.cy - cy) * (1.4 + Math.random()) + (Math.random() - 0.3) * 80;
+    const spin = (Math.random() - 0.5) * 220;
+
+    anime({
+      targets: poly,
+      translateX: dx,
+      translateY: dy,
+      rotate:     spin,
+      opacity:    0,
+      duration:   420 + Math.random() * 220,
+      delay:      Math.random() * 60,
+      easing:     'easeOutCubic',
+    });
+  });
+
+  // Snap the original card out immediately (shards provide the visual)
+  el.style.opacity = '0';
+
+  // Clean up and call onDone after shards finish
+  setTimeout(() => {
+    svg.remove();
+    onDone?.();
+  }, 720);
+}
+
+/* Generate N triangles that approximately tile a DOMRect.
+   Uses a scattered seed-point approach: random interior points
+   + the 4 corners + edge midpoints, then fan-triangulated. */
+function _triangulate(rect, n) {
+  const { left: x, top: y, width: w, height: h } = rect;
+
+  // Seed points: corners + edge mids + random interior
+  const pts = [
+    [x,         y        ],
+    [x + w,     y        ],
+    [x + w,     y + h    ],
+    [x,         y + h    ],
+    [x + w * .5, y       ],
+    [x + w,     y + h*.5 ],
+    [x + w * .5, y + h   ],
+    [x,         y + h*.5 ],
+  ];
+  for (let i = 0; i < n; i++) {
+    pts.push([
+      x + w * (0.1 + Math.random() * 0.8),
+      y + h * (0.1 + Math.random() * 0.8),
+    ]);
+  }
+
+  // Simple fan triangulation from centroid of each random interior point
+  // to its two nearest neighbours — produces plausible shards without
+  // a full Delaunay pass.
+  const cx = x + w / 2;
+  const cy = y + h / 2;
+  const shards = [];
+
+  // Sort points by angle around centroid
+  const sorted = pts.slice().sort((a, b) =>
+    Math.atan2(a[1] - cy, a[0] - cx) - Math.atan2(b[1] - cy, b[0] - cx)
+  );
+
+  for (let i = 0; i < sorted.length; i++) {
+    const a  = sorted[i];
+    const b  = sorted[(i + 1) % sorted.length];
+    const sc = [(cx + a[0] + b[0]) / 3, (cy + a[1] + b[1]) / 3];
+    shards.push({
+      pts: `${cx},${cy} ${a[0]},${a[1]} ${b[0]},${b[1]}`,
+      cx:  sc[0],
+      cy:  sc[1],
+    });
+  }
+
+  return shards;
+}

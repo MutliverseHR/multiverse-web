@@ -27,35 +27,10 @@
         <option value="black">Black</option>
       </select>
       <button id="btn-new">New Game</button>
-      <div class="header-divider"></div>
-      <label class="fx-row">
-        <span class="fx-label">Halos</span>
-        <span class="fx-toggle">
-          <input type="checkbox" id="fx-halos" checked>
-          <span class="fx-track"><span class="fx-thumb"></span></span>
-        </span>
-      </label>
-      <label class="fx-row">
-        <span class="fx-label">Wormhole</span>
-        <span class="fx-toggle">
-          <input type="checkbox" id="fx-wormhole" checked>
-          <span class="fx-track"><span class="fx-thumb"></span></span>
-        </span>
-      </label>
-      <label class="fx-row">
-        <span class="fx-label">Universes</span>
-        <span class="fx-toggle">
-          <input type="checkbox" id="fx-universes" checked>
-          <span class="fx-track"><span class="fx-thumb"></span></span>
-        </span>
-      </label>
     </div>
   </header>
 
   <section class="universes-section">
-    <div class="section-header">
-      <span class="section-title">Parallel Universes</span>
-    </div>
     <div class="universes-grid" id="forks-container">
 
       <!-- Main universe card — same structure as fork cards -->
@@ -83,6 +58,7 @@
     </div>
   </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>

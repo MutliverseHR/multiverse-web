@@ -318,16 +318,50 @@ class ForkBoard {
     this._engine.terminate();
     this._board?.destroy();
     this._overlay?.destroy();
-    this._el.classList.add('fork-exiting');
-    setTimeout(() => this._el.remove(), 300);
+    if (this._isFxOn('shatter')) {
+      shatterCard(this._el, this._palette.border, () => this._el.remove());
+    } else {
+      this._el.classList.add('fork-exiting');
+      setTimeout(() => this._el.remove(), 300);
+    }
   }
 
-  // Instant removal without animation — used by promote
+  // Used by promote — shatter all non-promoted forks
   silentDestroy() {
     if (this._thinking) this._engine.stop();
     this._engine.terminate();
     this._board?.destroy();
     this._overlay?.destroy();
-    this._el.remove();
+    if (this._isFxOn('shatter')) {
+      shatterCard(this._el, this._palette.border, () => this._el.remove());
+    } else {
+      this._el.remove();
+    }
+  }
+
+  // Fly this card to the main card's position, then call onDone
+  promoteAnimation(mainCardEl, onDone) {
+    if (this._thinking) this._engine.stop();
+    this._engine.terminate();
+    this._board?.destroy();
+    this._overlay?.destroy();
+
+    const from = this._el.getBoundingClientRect();
+    const to   = mainCardEl.getBoundingClientRect();
+
+    // Pin the card in place using fixed positioning so it can slide freely
+    this._el.style.cssText += `
+      position:fixed;top:${from.top}px;left:${from.left}px;
+      width:${from.width}px;margin:0;z-index:100;transition:none;
+    `;
+
+    anime({
+      targets:  this._el,
+      translateX: to.left - from.left,
+      translateY: to.top  - from.top,
+      duration: 460,
+      easing:   'easeInOutQuart',
+      complete: () => { this._el.remove(); onDone?.(); },
+    });
   }
 }

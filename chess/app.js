@@ -471,13 +471,26 @@ class ChessGame {
 
     const fen        = fork._game.fen();
     const playerSide = fork._playerSide;
+    const mainCardEl = document.querySelector('.board-card');
 
-    // Tear down every fork instantly (including the promoted one)
-    this._forks.forEach(f => f.silentDestroy());
+    // Shatter the main card — don't remove the element, _newGame lives inside it
+    const mainColor = getComputedStyle(mainCardEl).getPropertyValue('--fork-border').trim() || '#7c3aed';
+    shatterCard(mainCardEl, mainColor, () => {});
+
+    // Shatter every fork except the promoted one
+    this._forks.filter(f => f.id !== id).forEach(f => f.silentDestroy());
     this._forks = [];
 
-    // Reinitialise main board from the promoted position
-    this._newGame({ fen, playerSide });
+    // Fly the promoted fork to the main card position, then reinit
+    const { border, glow, label, darkSq } = fork._palette;
+    fork.promoteAnimation(mainCardEl, () => {
+      mainCardEl.style.setProperty('--fork-border', border);
+      mainCardEl.style.setProperty('--fork-glow',   glow);
+      mainCardEl.style.setProperty('--fork-label',  label);
+      mainCardEl.style.setProperty('--sq-dark',     darkSq);
+      mainCardEl.style.opacity = '';
+      this._newGame({ fen, playerSide });
+    });
   }
 }
 
