@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chess — Multiverse</title>
+
+  <!-- chessboard.js -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <span class="logo">MULTIVERSE</span>
+    <span class="logo-sub">Chess</span>
+  </header>
+
+  <main>
+    <!-- Left: board -->
+    <section class="board-wrap">
+      <div class="player-tag" id="tag-black">
+        <span class="player-icon">◆</span>
+        <span class="player-name">Stockfish</span>
+        <span class="clock" id="clock-black"></span>
+        <span class="thinking-dot" id="thinking" aria-label="thinking">●</span>
+      </div>
+
+      <div id="board"></div>
+
+      <div class="player-tag" id="tag-white">
+        <span class="player-icon">◇</span>
+        <span class="player-name">You</span>
+        <span class="clock" id="clock-white"></span>
+      </div>
+    </section>
+
+    <!-- Right: controls + history -->
+    <aside class="sidebar">
+      <div class="controls">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+          <option value="expert">Expert</option>
+        </select>
+
+        <label for="side">Play as</label>
+        <select id="side">
+          <option value="white" selected>White</option>
+          <option value="black">Black</option>
+        </select>
+
+        <button id="btn-new">New Game</button>
+      </div>
+
+      <div class="status-bar" id="status">Setting up engine…</div>
+
+      <div class="history-wrap">
+        <div class="history-header">Moves</div>
+        <ol class="history" id="history"></ol>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Dependencies -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
