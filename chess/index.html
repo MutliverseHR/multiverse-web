@@ -4,73 +4,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chess — Multiverse</title>
-
-  <!-- chessboard.js -->
   <link rel="stylesheet"
         href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" />
-
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <header>
-    <span class="logo">MULTIVERSE</span>
-    <span class="logo-sub">Chess</span>
+    <div class="header-brand">
+      <span class="logo">MULTIVERSE</span>
+      <span class="logo-sub">Chess</span>
+    </div>
+    <div class="header-controls">
+      <select id="difficulty" class="header-select">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+        <option value="expert">Expert</option>
+      </select>
+      <select id="side" class="header-select">
+        <option value="white" selected>White</option>
+        <option value="black">Black</option>
+      </select>
+      <button id="btn-new">New Game</button>
+      <div class="header-divider"></div>
+      <label class="fx-row">
+        <span class="fx-label">Halos</span>
+        <span class="fx-toggle">
+          <input type="checkbox" id="fx-halos" checked>
+          <span class="fx-track"><span class="fx-thumb"></span></span>
+        </span>
+      </label>
+      <label class="fx-row">
+        <span class="fx-label">Wormhole</span>
+        <span class="fx-toggle">
+          <input type="checkbox" id="fx-wormhole" checked>
+          <span class="fx-track"><span class="fx-thumb"></span></span>
+        </span>
+      </label>
+      <label class="fx-row">
+        <span class="fx-label">Universes</span>
+        <span class="fx-toggle">
+          <input type="checkbox" id="fx-universes" checked>
+          <span class="fx-track"><span class="fx-thumb"></span></span>
+        </span>
+      </label>
+    </div>
   </header>
 
-  <main>
-    <!-- Left: board -->
-    <section class="board-wrap">
-      <div class="player-tag" id="tag-black">
-        <span class="player-icon">◆</span>
-        <span class="player-name">Stockfish</span>
-        <span class="clock" id="clock-black"></span>
-        <span class="thinking-dot" id="thinking" aria-label="thinking">●</span>
+  <section class="universes-section">
+    <div class="section-header">
+      <span class="section-title">Parallel Universes</span>
+    </div>
+    <div class="universes-grid" id="forks-container">
+
+      <!-- Main universe card — same structure as fork cards -->
+      <div class="fork-card board-card">
+        <div class="fork-card-header">
+          <span class="fork-origin">◈ Main Universe</span>
+          <div class="fork-actions">
+            <button id="btn-fork" class="fork-btn fork-btn-fork" title="Fork this position">⑂</button>
+          </div>
+        </div>
+        <div class="board-wrap">
+          <div id="board"></div>
+        </div>
+        <div class="fork-universes">
+          <div class="fork-universe-header">Universes</div>
+          <div id="universe-list" class="fork-universe-list"></div>
+        </div>
+        <div class="fork-footer">
+          <span id="status" class="fork-status">Setting up engine…</span>
+          <span class="thinking-dot" id="thinking" aria-label="thinking">●</span>
+        </div>
       </div>
 
-      <div id="board"></div>
+      <!-- Fork cards injected here by app.js -->
+    </div>
+  </section>
 
-      <div class="player-tag" id="tag-white">
-        <span class="player-icon">◇</span>
-        <span class="player-name">You</span>
-        <span class="clock" id="clock-white"></span>
-      </div>
-    </section>
-
-    <!-- Right: controls + history -->
-    <aside class="sidebar">
-      <div class="controls">
-        <label for="difficulty">Difficulty</label>
-        <select id="difficulty">
-          <option value="easy">Easy</option>
-          <option value="medium" selected>Medium</option>
-          <option value="hard">Hard</option>
-          <option value="expert">Expert</option>
-        </select>
-
-        <label for="side">Play as</label>
-        <select id="side">
-          <option value="white" selected>White</option>
-          <option value="black">Black</option>
-        </select>
-
-        <button id="btn-new">New Game</button>
-      </div>
-
-      <div class="status-bar" id="status">Setting up engine…</div>
-
-      <div class="history-wrap">
-        <div class="history-header">Moves</div>
-        <ol class="history" id="history"></ol>
-      </div>
-    </aside>
-  </main>
-
-  <!-- Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
+  <script src="effects.js"></script>
+  <script src="universe.js"></script>
+  <script src="fork.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

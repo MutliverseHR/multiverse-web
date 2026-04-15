@@ -77,4 +77,33 @@ html, body {
   50%       { opacity: 0.6; }
 }
 
+/* ── Nav ─────────────────────────────────────────────── */
+#nav {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 12px;
+}
+
+.nav-link {
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 7px 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.nav-link:hover {
+  color: #a78bfa;
+  border-color: rgba(167,139,250,0.35);
+  background: rgba(124,58,237,0.1);
+}
+
 /* SVG node styles set via D3, but glow filter is here */
