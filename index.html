@@ -1,33 +1,217 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Multiverse</title>
-  <meta name="description" content="Explore parallel universes — interactive experiences across dimensions." />
-  <meta property="og:title" content="Multiverse" />
-  <meta property="og:description" content="Explore parallel universes — interactive experiences across dimensions." />
-  <meta property="og:url" content="https://multiverse.hr" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MontiAI — A studio note, 2026</title>
+  <meta name="description" content="MontiAI is a stealth-mode studio building a quiet, AI-assisted companion for parents who care about how their children spend the early years." />
+  <meta property="og:title" content="MontiAI — A studio note, 2026" />
+  <meta property="og:description" content="A small studio building a quiet companion for the first six years." />
   <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0c0c18" />
+  <meta name="theme-color" content="#fcf9f4" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <canvas id="starfield"></canvas>
 
-  <div id="ui">
-    <div id="wordmark">MULTIVERSE</div>
-    <div id="hint">click · drag · explore</div>
-  </div>
+  <!-- ────────────── Top bar ────────────── -->
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="wordmark" href="#top" aria-label="MontiAI">
+        <span class="glyph" aria-hidden="true"></span>Monti<em>AI</em>
+      </a>
+      <span class="status-pill">
+        <span class="dot" aria-hidden="true"></span>
+        In stealth · 2026
+      </span>
+    </div>
+  </header>
 
-  <nav id="nav">
-    <a href="chess/" class="nav-link">♟ Chess</a>
-  </nav>
+  <!-- ────────────── Hero ────────────── -->
+  <section class="hero" id="top">
+    <div class="shell">
+      <div class="hero-eyebrow-wrap">
+        <div class="hero-eyebrow">
+          <span class="rule"></span>
+          <span>A studio note · Vol. I, no. 1</span>
+        </div>
+      </div>
 
-  <svg id="scene"></svg>
+      <h1 class="hero-headline">
+        A prepared environment, <em>observed</em> by intelligence.
+      </h1>
 
-  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
-  <script src="script.js"></script>
+      <p class="hero-deck">
+        A small studio is at work on a companion for parents — patient, considered, and pointed away from the screen.
+      </p>
+
+      <dl class="hero-meta">
+        <div>
+          <dt>Status</dt>
+          <dd>Private development</dd>
+        </div>
+        <div>
+          <dt>Method</dt>
+          <dd>Montessori</dd>
+        </div>
+        <div>
+          <dt>Available</dt>
+          <dd>By invitation</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ────────────── Premise ────────────── -->
+  <section class="section section--low" id="premise">
+    <div class="shell">
+      <p class="section-eyebrow"><span class="num">I.</span> <span>The premise</span></p>
+      <div class="premise">
+        <div class="premise-prose">
+          <h2 class="section-headline">The early years deserve more than a <em>feed</em>.</h2>
+        </div>
+        <div class="premise-prose">
+          <p class="lead">
+            Maria Montessori called it <em>the prepared environment</em> — a space arranged with intention, where every object earns its place and the adult's role is to observe, not to direct.
+          </p>
+          <p>
+            The parenting software that exists today is built on the opposite instinct — it wants your attention, measures your engagement, and mistakes activity for progress. We are building a quiet tool that does its job and gets out of the way.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────── Approach ────────────── -->
+  <section class="section" id="approach">
+    <div class="shell">
+      <p class="section-eyebrow"><span class="num">II.</span> <span>The approach</span></p>
+      <h2 class="section-headline">Three commitments we are <em>unwilling</em> to negotiate.</h2>
+
+      <div class="principles">
+        <article class="principle">
+          <span class="num">i.</span>
+          <h3>Observation, not <em>optimisation</em>.</h3>
+          <p>No streaks, no badges, no score. The only thing worth recording is a small, honest note about what your child chose to do — and how it went.</p>
+          <span class="tag">No metrics theatre</span>
+        </article>
+
+        <article class="principle">
+          <span class="num">ii.</span>
+          <h3>For the adult, not the <em>child</em>.</h3>
+          <p>The app is a preparation tool for parents — a way to learn the method, understand what your child is ready for, and grow as a guide. Your child never touches it.</p>
+          <span class="tag">The prepared adult</span>
+        </article>
+
+        <article class="principle">
+          <span class="num">iii.</span>
+          <h3>Intelligence that <em>listens</em> first.</h3>
+          <p>Log what you observe. The AI connects the dots — surfacing what your child is developmentally ready for, explaining why, and helping you prepare the environment before they walk into the room.</p>
+          <span class="tag">Your thinking partner</span>
+        </article>
+      </div>
+
+      <!-- The "Observation Moment" — the system's signature component -->
+      <div class="observation" role="note" aria-label="Sample observation">
+        <div class="ob-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12c3-5 7-7.5 9-7.5S18 7 21 12c-3 5-7 7.5-9 7.5S6 17 3 12Z"/>
+            <circle cx="12" cy="12" r="2.6"/>
+          </svg>
+        </div>
+        <div class="ob-body">
+          <p class="small">A note from the work mat</p>
+          <p><em>"Tried the pink tower again, third morning in a row. Today she built it and walked away. Picked up the brown stair instead — first time in over a week."</em></p>
+        </div>
+        <div class="ob-meta">
+          Logged · Thursday<br/>03 weeks observed
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────── Status & contacts ────────────── -->
+  <section class="section section--lowest" id="contact">
+    <div class="shell">
+      <p class="section-eyebrow"><span class="num">III.</span> <span>The status</span></p>
+      <div class="status">
+        <h2 class="status-headline">
+          MontiAI is in <em>private</em> development. We are not raising publicly, and we are not on the App Store yet.
+        </h2>
+        <div class="contacts">
+          <a class="contact-block" href="mailto:press@montiai.app">
+            <span class="role">Press &amp; editorial</span>
+            <span class="addr">press@montiai.app <span class="arrow" aria-hidden="true">→</span></span>
+            <span class="note">For interviews, the studio note, or to be added to the quarterly letter.</span>
+          </a>
+          <a class="contact-block" href="mailto:partners@montiai.app">
+            <span class="role">Investors &amp; partners</span>
+            <span class="addr">partners@montiai.app <span class="arrow" aria-hidden="true">→</span></span>
+            <span class="note">Conversations welcome, by introduction. We answer slowly, and on purpose.</span>
+          </a>
+          <a class="contact-block" href="mailto:hello@montiai.app">
+            <span class="role">Everyone else</span>
+            <span class="addr">hello@montiai.app <span class="arrow" aria-hidden="true">→</span></span>
+            <span class="note">Parents, Montessori guides, and the otherwise curious.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ────────────── Footer / Impressum ────────────── -->
+  <footer class="footer" id="impressum">
+    <div class="shell">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="wordmark" href="#top" aria-label="MontiAI">
+            <span class="glyph" aria-hidden="true"></span>Monti<em>AI</em>
+          </a>
+          <p class="blurb">A small studio building a quiet companion for the first six years.</p>
+        </div>
+
+        <div>
+          <h4>Impressum</h4>
+          <ul>
+            <li>MULTIVERSE d.o.o.</li>
+            <li>Siget 8</li>
+            <li>10000 Zagreb</li>
+            <li>Croatia</li>
+            <li>&nbsp;</li>
+            <li>OIB: 55463413018</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li>press@montiai.app</li>
+            <li>partners@montiai.app</li>
+            <li>hello@montiai.app</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>The studio</h4>
+          <ul>
+            <li><a href="#premise">Premise</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#contact">Status</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-base">
+        <span>&copy; 2026 MontiAI — All rights reserved</span>
+        <span>Drafted in stealth · Updated quarterly</span>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
